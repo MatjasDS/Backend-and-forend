@@ -1,16 +1,13 @@
 import { Component } from '@angular/core';
 import { APIService } from './api.service';
-import { NgModule } from '@angular/core';
-import { Subscriber } from 'rxjs';
-import { element } from 'protractor';
-
+import { MatTableModule } from '@angular/material';
 
 interface Users{
   name:string;
   id:number;
 }
 
-interface Notities{
+interface Notes{
   id:number;
   message:string;
   userId:number;
@@ -29,6 +26,7 @@ export class AppComponent {
   addNote:boolean = false;
   showNotes:boolean = false;
   userList: Array<Users>;
+  notesList: Array<Notes>;
   displayedColumnsUsers: string[] = ["Naam"];
   service: APIService;
 
