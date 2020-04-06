@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { APIService } from './api.service';
-import { MatTableModule } from '@angular/material';
 
 interface Users{
   name:string;
@@ -29,6 +28,8 @@ export class AppComponent {
   notesList: Array<Notes>;
   displayedColumnsUsers: string[] = ["Naam"];
   service: APIService;
+  ingegevenNaamToevoegen: string;
+
 
   constructor(apiService: APIService){
     this.service = apiService;
@@ -41,17 +42,13 @@ export class AppComponent {
       this.addUser=true;
   }
 
-  ShowUserView = () => {
-    this.showUsers=true;
+  AddUserComponent = () => {
+    this.service.AddUser(this.ingegevenNaamToevoegen).subscribe((response) => {
+      console.log(response);
+    });
   }
 
-  AddNoteView = () => {
-    this.addNote=true;
-  }
-
-  ShowNotesView = () => {
-    this.showNotes=true;
-  }
+  
 
   
 }

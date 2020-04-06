@@ -2,9 +2,6 @@
 <div >
   <button id="addUser" (click)="AddUserView()">Add user</button>
 </div>
-<div >
-  <button id="showUsers" (click)="ShowUserView()">Show users</button>
-</div>
 
 <table mat-table [dataSource]="userList">
   <ng-container matColumnDef="Naam">
@@ -15,19 +12,9 @@
 </table>
 
 <div *ngIf="addUser">
-  <h1>test adduser</h1>
-  <div>
-    <button id="addNote" (click)="AddNoteView()">Add note</button>
-    <button id="showNotes" (click)="ShowNotesView()">Show notes</button>
-  </div>
-  <div *ngIf="addNote">
-    <h1>test addnote</h1>
-  </div>
-  <div *ngIf="showNotes">
-    <h1>testshownote</h1>
-  </div>
-</div>
-
-<div *ngIf="showUsers">
-  <h1>testshowuser</h1>
+  <mat-form-field id="naamToevoegen" appearance="fill">
+      <input matInput min="1" max="50" type="string" [(ngModel)]="ingegevenNaamToevoegen" #ctrl="ngModel"
+          required placeholder="max 50 letters">
+  </mat-form-field>
+  <button mat-raised-button (click)="AddUserComponent()">Voeg toe </button>
 </div>
