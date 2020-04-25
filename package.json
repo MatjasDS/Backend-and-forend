@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.0",
     "angular-material": "^1.1.21",
     "rxjs": "^6.5.5",
+    "sqlite3": "^4.1.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
