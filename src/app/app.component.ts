@@ -28,7 +28,7 @@ export class AppComponent {
   notesList: Array<Notes>;
   service: APIService;
   ingegevenNaamToevoegen: string;
-  displayedColumnsUsers: string[] = ['name']; 
+  displayedColumnsUsers: string[] = ["name","remove"]; 
 
 
   constructor(apiService: APIService){
@@ -38,6 +38,12 @@ export class AppComponent {
       this.userList = data;
     })
   }
+
+  UserlistRefresh = () => this.service.getUsers().subscribe((data: Array<Users>) => {
+    console.log(data);
+    this.userList = data;
+  });
+
   AddUserView = () => {
       this.addUser=true;
   }
@@ -46,9 +52,15 @@ export class AppComponent {
     this.service.AddUser(this.ingegevenNaamToevoegen).subscribe((response) => {
       console.log(response);
     });
+    this.UserlistRefresh();
   }
 
-  
+  DeleteUserAndNotesComponent = (removeName: string) => {
+      this.service.DeleteUserAndNotes(removeName).subscribe((response) => {
+        this.ingegevenNaamToevoegen = "",
+          this.UserlistRefresh();
+      });
+  }
 
   
 }
