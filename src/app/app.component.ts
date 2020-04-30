@@ -28,7 +28,7 @@ export class AppComponent {
   notesList: Array<Notes>;
   service: APIService;
   ingegevenNaamToevoegen: string;
-  displayedColumnsUsers: string[] = ["name","remove"]; 
+  displayedColumnsUsers: string[] = ['name','remove']; 
 
 
   constructor(apiService: APIService){
@@ -51,8 +51,9 @@ export class AppComponent {
   AddUserComponent = () => {
     this.service.AddUser(this.ingegevenNaamToevoegen).subscribe((response) => {
       console.log(response);
+      this.UserlistRefresh();
     });
-    this.UserlistRefresh();
+    
   }
 
   DeleteUserAndNotesComponent = (removeName: string) => {
