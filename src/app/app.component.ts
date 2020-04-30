@@ -26,9 +26,9 @@ export class AppComponent {
   showNotes:boolean = false;
   userList: Array<Users>;
   notesList: Array<Notes>;
-  displayedColumnsUsers: string[] = ["Naam"];
   service: APIService;
   ingegevenNaamToevoegen: string;
+  displayedColumnsUsers: string[] = ['name']; 
 
 
   constructor(apiService: APIService){

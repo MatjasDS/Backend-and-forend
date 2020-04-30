@@ -9,18 +9,18 @@ export class APIService {
   constructor(private http: HttpClient) {}
 
     getUsers = () =>{
-      return this.http.get('https://beneficial-evening-meteoroid.glitch.me/users');
+      return this.http.get('https://laced-season-thing.glitch.me/users');
     }
-    AddUser = (name:string) =>{
-      return this.http.get('https://beneficial-evening-meteoroid.glitch.me/add?name='+name);
+    AddUser = (name:string) =>{let body = {name: name,};
+      return this.http.post('https://laced-season-thing.glitch.me/add', body);
     }
     AddNote = (note:string, name:string) =>{
-      return this.http.get('https://beneficial-evening-meteoroid.glitch.me/addnote?name='+name+'&content='+note);
+      return this.http.get('https://laced-season-thing.glitch.me/addnote?name='+name+'&content='+note);
     }
     GetNotes = (name:string) =>{
-      return this.http.get('https://beneficial-evening-meteoroid.glitch.me/notes?name='+name);
+      return this.http.get('https://laced-season-thing.glitch.me/notes?name='+name);
     }
     DeleteUserAndNotes = (name:string) =>{
-      return this.http.get('https://beneficial-evening-meteoroid.glitch.me/remove?name='+name);
+      return this.http.get('https://laced-season-thing.glitch.me/remove?name='+name);
     }
 }
