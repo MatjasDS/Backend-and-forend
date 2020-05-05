@@ -12,15 +12,15 @@ export class APIService {
       return this.http.get('https://laced-season-thing.glitch.me/users');
     }
     AddUser = (name:string) =>{let body = {name: name,};
-      return this.http.post('https://laced-season-thing.glitch.me/add', body);
+      return this.http.post('https://laced-season-thing.glitch.me/users', body);
     }
-    AddNote = (note:string, name:string) =>{
-      return this.http.get('https://laced-season-thing.glitch.me/addnote?name='+name+'&content='+note);
+    AddNote = (note:string, name:string) =>{let body = {content: note, name: name}
+      return this.http.post('https://laced-season-thing.glitch.me/notes',body);
     }
     GetNotes = (name:string) =>{
       return this.http.get('https://laced-season-thing.glitch.me/notes?name='+name);
     }
     DeleteUserAndNotes = (name:string) =>{
-      return this.http.get('https://laced-season-thing.glitch.me/remove?name='+name);
+      return this.http.delete('https://laced-season-thing.glitch.me/users?name='+name);
     }
 }
