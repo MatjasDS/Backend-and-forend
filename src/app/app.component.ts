@@ -10,6 +10,7 @@ interface Users{
 interface Notes{
   id:number;
   message:string;
+  categorie: string;
   userId:number;
 }
 
@@ -30,8 +31,10 @@ export class AppComponent {
   service: APIService;
   ingegevenNaamToevoegen: string;
   ingegevenNoteToevoegen: string;
+  ingegevenCategoryToevoegen : string;
+  categoryArray: string[] = ['Privé', 'Dringend', 'Anders'];
   displayedColumnsUsers: string[] = ['name','note','shownote','remove']; 
-  displayedColumnsNotes: string[] = ['content'];
+  displayedColumnsNotes: string[] = ['content', 'category', 'removenote'];
 
 
   constructor(apiService: APIService){
@@ -45,6 +48,11 @@ export class AppComponent {
   UserlistRefresh = () => this.service.getUsers().subscribe((data: Array<Users>) => {
     console.log(data);
     this.userList = data;
+  });
+
+  NoteslistRefresh = () => this.service.GetNotes(this.ingegevenNaamToevoegen).subscribe((data: Array<Notes>) => {
+    console.log(data);
+    this.notesList = data;
   });
 
   AddUserView = () => {
@@ -66,15 +74,14 @@ export class AppComponent {
       this.UserlistRefresh();
       this.addUser = false;
     });
-    
   }
 
   AddNoteComponent = () => {
-    this.service.AddNote(this.ingegevenNoteToevoegen, this.ingegevenNaamToevoegen).subscribe((response) => {
+    this.service.AddNote(this.ingegevenNoteToevoegen, this.ingegevenCategoryToevoegen, this.ingegevenNaamToevoegen).subscribe((response) => {
       console.log(response);
       this.UserlistRefresh();
       this.addNote = false;
-    })
+    });
   }
 
   ShowNoteComponent = (addNoteforUser:string) => {
@@ -85,6 +92,14 @@ export class AppComponent {
       this.showNote = true;
       this.addNote = false;
       this.addUser = false;
+    });
+  }
+
+  DeleteNoteComponent = (note: string) => {
+    this.service.DeleteNote(note, this.ingegevenNaamToevoegen).subscribe((response) =>{
+      this.ingegevenNaamToevoegen = "";
+      this.showNote = false;
+      this.NoteslistRefresh();
     });
   }
 
