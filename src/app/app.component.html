@@ -1,5 +1,5 @@
 <h1>Opdracht frontend/backend</h1>
-<div >
+<div>
   <button id="addUser" (click)="AddUserView()">Add user</button>
 </div>
 
@@ -12,21 +12,21 @@
   <ng-container matColumnDef="note">
     <th mat-header-cell *matHeaderCellDef>Notities</th>
     <td mat-cell *matCellDef="let element">
-      <Button mat-raised-button id="addNote" (click)="AddNoteView(element.name)">Voeg toe</Button>
+      <button mat-raised-button id="addNote" (click)="AddNoteView(element.name)">Voeg toe</button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="shownote">
     <th mat-header-cell *matHeaderCellDef>Toon notities</th>
     <td mat-cell *matCellDef="let element">
-      <Button mat-raised-button id="showNote" (click)="ShowNoteComponent(element.name)">Toon</Button>
+      <button mat-raised-button id="showNote" (click)="ShowNoteComponent(element.name)">Toon</button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="remove">
     <th mat-header-cell *matHeaderCellDef>Verwijderen</th>
     <td mat-cell *matCellDef="let element"> 
-      <Button mat-raised-button (click)="DeleteUserAndNotesComponent(element.name)">Verwijder {{element.name}}</Button>
+      <button mat-raised-button (click)="DeleteUserAndNotesComponent(element.name)">Verwijder {{element.name}}</button>
     </td>
   </ng-container>
 
@@ -42,6 +42,27 @@
           required placeholder="max 50 letters">
   </mat-form-field>
   <button mat-raised-button (click)="AddUserComponent()">Voeg toe </button>
+</div>
+
+<div *ngIf="editNote">
+  <h3>Bewerk een notitie</h3>
+
+  <mat-form-field id="categorieInput" appearance="fill">
+    
+  <mat-label>Categorie</mat-label>
+    <mat-select [(value)]=ingegevenCategoryToevoegen>
+      <mat-option *ngFor="let categorie of categoryArray" [value]="categorie">
+        <p>{{categorie}}</p>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field id="notitieToevoegen" appearance="fill">
+      <input matInput min="1" max="150" type="string" [(ngModel)]="ingegevenNoteToevoegen" #ctrl="ngModel"
+          required placeholder="max 150 letters">
+  </mat-form-field>
+
+  <button mat-raised-button (click)="EditNoteComponent()">Bewerk</button>
 </div>
 
 <div *ngIf="addNote">
@@ -66,7 +87,12 @@
 </div>
 
 <div *ngIf="showNote">
+  <mat-form-field>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+</mat-form-field>
+
   <table id="tabelNotities" mat-table [dataSource]="notesList">
+    
     <ng-container matColumnDef="content">
       <th mat-header-cell *matHeaderCellDef> Notities van {{ ingegevenNaamToevoegen }}</th>
       <td mat-cell *matCellDef="let element"> {{ element.content }} </td>
@@ -76,6 +102,13 @@
       <th mat-header-cell *matHeaderCellDef> Categorie</th>
       <td mat-cell *matCellDef="let element"> {{ element.category }} </td>
     </ng-container>
+
+    <ng-container matColumnDef="editnote">
+    <th mat-header-cell *matHeaderCellDef>Bewerken</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button id="editNote" (click)="EditNoteView(ingegevenNaamToevoegen, element.category, element.content)">Bewerk</button>
+    </td>
+  </ng-container>
 
     <ng-container matColumnDef="removenote">
       <th mat-header-cell *matHeaderCellDef>Verwijderen</th>
