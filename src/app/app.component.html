@@ -91,7 +91,7 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
 </mat-form-field>
 
-  <table id="tabelNotities" mat-table [dataSource]="notesList">
+  <table id="tabelNotities" mat-table [dataSource]="dataSource">
     
     <ng-container matColumnDef="content">
       <th mat-header-cell *matHeaderCellDef> Notities van {{ ingegevenNaamToevoegen }}</th>

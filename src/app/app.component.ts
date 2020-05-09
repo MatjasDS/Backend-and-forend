@@ -37,8 +37,7 @@ export class AppComponent {
   categoryArray: string[] = ['Privé', 'Dringend', 'Anders'];
   displayedColumnsUsers: string[] = ['name','note','shownote','remove']; 
   displayedColumnsNotes: string[] = ['content', 'category', 'editnote', 'removenote'];
-  dataSource = new MatTableDataSource<Notes>();
-
+  dataSource = new MatTableDataSource<Notes>(this.notesList);
 
   constructor(apiService: APIService){
     this.service = apiService;
@@ -120,6 +119,7 @@ export class AppComponent {
       this.service.GetNotes(this.ingegevenNaamToevoegen).subscribe((data: Array<Notes>) => {
       console.log(data);
       this.notesList = data;
+      this.dataSource = new MatTableDataSource<Notes>(this.notesList);
       this.showNote = true;
       this.addNote = false;
       this.addUser = false;
